@@ -1,5 +1,17 @@
 name: 'AI code reviewer'
 description: 'Reviews GitHub pull requests'
+inputs:
+  api-endpoint:
+    description: "The URL to then API endpoint."
+    required: true
+    default: "https://api.openai.com/v1/chat/completions"
+  api-key:
+    description: "The API key to use for the API endpoint."
+    required: false
+  model:
+    description: "ID of the model to use."
+    required: true
+    default: "gpt-4o-mini"
 
 runs:
   using: 'node20'

@@ -31164,7 +31164,14 @@ async function main() {
     return;
   }
 
-  await createPullRequestComment(octokit, repository, pullRequest, "PR comment from GitHub action");
+  const apiEndpoint = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('api-endpoint');
+  console.log(`API endpoint: ${apiEndpoint}`);
+  const apiKey = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('api-key');
+  console.log(`API key: ${apiKey}`);
+  const model = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('model');
+  console.log(`model: ${model}`);
+
+  await createPullRequestComment(octokit, repository, pullRequest, `PR comment from GitHub action. Input param api-endpoint: ${apiEndpoint}`);
 }
 
 main().catch((error) => {

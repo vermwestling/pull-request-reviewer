@@ -25,7 +25,14 @@ async function main() {
     return;
   }
 
-  await createPullRequestComment(octokit, repository, pullRequest, "PR comment from GitHub action");
+  const apiEndpoint = core.getInput('api-endpoint');
+  console.log(`API endpoint: ${apiEndpoint}`);
+  const apiKey = core.getInput('api-key');
+  console.log(`API key: ${apiKey}`);
+  const model = core.getInput('model');
+  console.log(`model: ${model}`);
+
+  await createPullRequestComment(octokit, repository, pullRequest, `PR comment from GitHub action. Input param api-endpoint: ${apiEndpoint}`);
 }
 
 main().catch((error) => {
