@@ -1,5 +1,6 @@
 import * as core from '@actions/core';
 import { getOctokit, context } from "@actions/github";
+import doReview from './pull-request-reviewer';
 
 async function createPullRequestComment(octokit, repository, pullRequest, comment) {
   await octokit.rest.issues.createComment({
@@ -32,7 +33,8 @@ async function main() {
   const model = core.getInput('model');
   console.log(`model: ${model}`);
 
-  await createPullRequestComment(octokit, repository, pullRequest, `PR comment from GitHub action. Input param api-endpoint: ${apiEndpoint}`);
+  const review = await doReview(apiEndpoint, apiKey, model, "Hello!");
+  await createPullRequestComment(octokit, repository, pullRequest, `Review test:\n ${review}`);
 }
 
 main().catch((error) => {

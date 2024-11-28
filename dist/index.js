@@ -29201,6 +29201,14 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 407:
+/***/ ((module) => {
+
+module.exports = eval("require")("./pull-request-reviewer");
+
+
+/***/ }),
+
 /***/ 9491:
 /***/ ((module) => {
 
@@ -31137,6 +31145,9 @@ __nccwpck_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(3134);
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _pull_request_reviewer__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(407);
+/* harmony import */ var _pull_request_reviewer__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(_pull_request_reviewer__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -31171,7 +31182,8 @@ async function main() {
   const model = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('model');
   console.log(`model: ${model}`);
 
-  await createPullRequestComment(octokit, repository, pullRequest, `PR comment from GitHub action. Input param api-endpoint: ${apiEndpoint}`);
+  const review = await _pull_request_reviewer__WEBPACK_IMPORTED_MODULE_2___default()(apiEndpoint, apiKey, model, "Hello!");
+  await createPullRequestComment(octokit, repository, pullRequest, `Review test:\n ${review}`);
 }
 
 main().catch((error) => {
