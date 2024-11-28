@@ -1,12 +1,18 @@
 import * as core from '@actions/core';
 import { getOctokit, context } from "@actions/github";
 
-async function postApiCall(url, data) {
+async function postApiCall(url, apiKey, data) {
+  const headers = {
+    'Content-Type': 'application/json'
+  };
+
+  if (apiKey) {
+    headers['Authorization'] = `Bearer ${apiKey}`;
+  }
+
   const response = await fetch(url, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: headers,
     body: JSON.stringify(data)
   });
 
@@ -32,7 +38,7 @@ async function doReview(apiEndpoint, apiKey, model, userPrompt) {
       ]
     }
 
-    const response = await postApiCall(apiEndpoint, postData);
+    const response = await postApiCall(apiEndpoint, apiKey, postData);
     console.log(`Response: ${JSON.stringify(response)}`);
     return response.choices[0].message.content;
 }
