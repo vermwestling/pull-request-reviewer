@@ -8,7 +8,13 @@ on:
 jobs:
   pull-request:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write
     name: Pull Request Reviewer
     steps:
       - name: Review PR
         uses: vermwestling/pull-request-reviewer@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
