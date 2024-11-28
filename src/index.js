@@ -23,6 +23,28 @@ async function postApiCall(url, apiKey, data) {
   return response.json();
 }
 
+async function getPullRequestDiff(octokit, repository, pull_request) {
+  const owner = repository?.owner?.login;
+  const repo = repository?.name;
+  const pull_number = pull_request?.number;
+
+  console.info(`PR code diff for: ${owner}, ${repo}, ${pull_number}`);
+  if (!owner || !repo || typeof(pull_number) !== 'number') {
+    throw Error('Missing data required for fetching pull request diff.');
+  }
+
+  const response = await octokit.rest.pulls.get({
+    owner,
+    repo,
+    pull_number,
+    headers: { accept: "application/vnd.github.v3.diff" },
+  });
+
+  const diff = String(response.data);
+  console.info(`Diff: ${diff}`);
+  return diff;
+}
+
 async function doReview(apiEndpoint, apiKey, model, userPrompt) {
   const postData = {
       "model": model,
@@ -59,11 +81,11 @@ async function main() {
   const repository = context.payload.repository; 
 
   if (!pullRequest) {
-    core.setFailed("❌ Expecting pull_request.");
+    core.setFailed("❌ Expecting context to contain pull_request.");
     return;
   }
   if (!repository) {
-    core.setFailed("❌ Expecting repository.");
+    core.setFailed("❌ Expecting context to contain repository.");
     return;
   }
 
@@ -74,8 +96,9 @@ async function main() {
   const model = core.getInput('model');
   console.log(`model: ${model}`);
 
-  const review = await doReview(apiEndpoint, apiKey, model, "Hello!");
-  await createPullRequestComment(octokit, repository, pullRequest, `Review test:\n ${review}`);
+  const diff = await getPullRequestDiff(octokit, repository, pullRequest);
+  const review = await doReview(apiEndpoint, apiKey, model, diff);
+  await createPullRequestComment(octokit, repository, pullRequest, `Review diff test:\n ${review}`);
 }
 
 main().catch((error) => {
