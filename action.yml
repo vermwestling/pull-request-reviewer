@@ -1,0 +1,6 @@
+name: 'AI code reviewer'
+description: 'Reviews GitHub pull requests'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
