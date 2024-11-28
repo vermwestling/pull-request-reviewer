@@ -29201,14 +29201,6 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 407:
-/***/ ((module) => {
-
-module.exports = eval("require")("./pull-request-reviewer");
-
-
-/***/ }),
-
 /***/ 9491:
 /***/ ((module) => {
 
@@ -31145,11 +31137,44 @@ __nccwpck_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(3134);
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _pull_request_reviewer__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(407);
-/* harmony import */ var _pull_request_reviewer__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(_pull_request_reviewer__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
+async function postApiCall(url, data) {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to post data: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+async function doReview(apiEndpoint, apiKey, model, userPrompt) {
+  const postData = {
+      "model": model,
+      "messages": [
+          {
+              "role": "system",
+              "content": "You are a helpful assistant."
+          },
+          {
+              "role": "user",
+              "content": userPrompt
+          }
+      ]
+    }
+
+    const response = await postApiCall(apiEndpoint, postData);
+    console.log(`Response: ${JSON.stringify(response)}`);
+    return response.choices[0].message.content;
+}
 
 async function createPullRequestComment(octokit, repository, pullRequest, comment) {
   await octokit.rest.issues.createComment({
@@ -31182,7 +31207,7 @@ async function main() {
   const model = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('model');
   console.log(`model: ${model}`);
 
-  const review = await _pull_request_reviewer__WEBPACK_IMPORTED_MODULE_2___default()(apiEndpoint, apiKey, model, "Hello!");
+  const review = await doReview(apiEndpoint, apiKey, model, "Hello!");
   await createPullRequestComment(octokit, repository, pullRequest, `Review test:\n ${review}`);
 }
 
