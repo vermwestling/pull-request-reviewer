@@ -12,6 +12,10 @@ inputs:
     description: "ID of the model to use."
     required: true
     default: "gpt-4o-mini"
+  review-type:
+    description: "The type of code review. Value 'PR comment' will post a single review comment on the PR. Value 'File comment' will post review comments on lines in files."
+    required: false
+    default: "File comment"
 
 runs:
   using: 'node20'
