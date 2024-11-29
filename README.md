@@ -1,6 +1,15 @@
 # Pull Request reviewer
 GitHub action that reviews pull request.
 
+## Exmaple pull requests
+
+### Review type: PR comment
+[PR example 1](https://github.com/vermwestling/pull-request-reviewer/pull/11)
+[PR example 2](https://github.com/vermwestling/pull-request-reviewer/pull/15)
+
+### Review type: File comment
+[PR example 1](https://github.com/vermwestling/pull-request-reviewer/pull/13)
+
 ## Inputs
 
 | name         | required | type   | default         | description |
@@ -43,7 +52,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-### Configuration for using a local model
+### Configuration for using a local hosted model
 The example below shows the Mistral Codestral model running on a local machine using Ollama
 ```yml
 name: "Pull Request"
