@@ -12,6 +12,9 @@ GitHub action that reviews pull request.
 
 
 ## Example usage
+
+### Configuration for using OpenAI model
+The example below shows the configuration for the OpenAI gpt-4o-mini model
 ```yml
 name: "Pull Request"
 on:
@@ -35,6 +38,36 @@ jobs:
         with:
           api-key: ${{ secrets.OPENAI_API_KEY }}
           model: 'gpt-4o-mini'
+          review-type: 'File comment'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+### Configuration for using a local model
+The example below shows the Mistral Codestral model running on a local machine using Ollama
+```yml
+name: "Pull Request"
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write
+    name: Pull Request Reviewer
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Review PR
+        uses: vermwestling/pull-request-reviewer@main
+        with:
+          api-endpoint: 'https://some-host/v1/chat/completions'
+          model: 'codestral'
           review-type: 'File comment'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
