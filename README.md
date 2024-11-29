@@ -21,6 +21,7 @@ PR examples of reviewing Java code with three known issues:
 
 [PR example 2 - model Qwen Coder by Alibaba](https://github.com/vermwestling/pull-request-reviewer/pull/19)
 
+[PR example 3 - model GPT-4o by OpenAI](https://github.com/vermwestling/pull-request-reviewer/pull/23)
 
 ## Inputs
 
