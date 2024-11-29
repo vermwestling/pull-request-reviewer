@@ -22,6 +22,7 @@ jobs:
         with:
           api-endpoint: 'https://2334-158-174-44-98.ngrok-free.app/v1/chat/completions'
           model: 'codestral'
-          review-type: 'File comment'
+          #review-type: 'File comment'
+          review-type: 'PR comment'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
