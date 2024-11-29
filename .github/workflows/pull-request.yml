@@ -21,7 +21,7 @@ jobs:
         uses: vermwestling/pull-request-reviewer@main
         with:
           api-endpoint: 'https://542a-92-34-18-167.ngrok-free.app/v1/chat/completions'
-          model: 'qwen2.5-coder:32b'
+          model: 'codellama:34b'
           review-type: 'PR comment'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
