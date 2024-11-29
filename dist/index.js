@@ -38760,11 +38760,11 @@ async function reviewCode(parsedDiff, prDetails) {
     if (file.to === "/dev/null") continue;
     for (const chunk of file.chunks) {
       const prompt = createPrompt(file, chunk, prDetails);
-      const aiResponse = await doReview(prompt, SYSTEM_PROMPT_TEXT);
+      let aiResponse = await doReview(prompt, SYSTEM_PROMPT_TEXT);
       if (aiResponse) {
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Review response: ${aiResponse}`);
-        aiResponse = aiResponse.replace(/^(```json)/,"");
-        aiResponse = aiResponse.replace(/(```)$/, "").trim();
+        aiResponse = aiResponse.replace(/^```json/,"");
+        aiResponse = aiResponse.replace(/```$/, "").trim();
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Review trimmed response: ${aiResponse}`);
         const newComments = createComment(file, chunk, aiResponse);
         if (newComments) {

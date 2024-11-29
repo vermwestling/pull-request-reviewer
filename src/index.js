@@ -38,11 +38,11 @@ async function reviewCode(parsedDiff, prDetails) {
     if (file.to === "/dev/null") continue;
     for (const chunk of file.chunks) {
       const prompt = createPrompt(file, chunk, prDetails);
-      const aiResponse = await doReview(prompt, SYSTEM_PROMPT_TEXT);
+      let aiResponse = await doReview(prompt, SYSTEM_PROMPT_TEXT);
       if (aiResponse) {
         core.info(`Review response: ${aiResponse}`);
-        aiResponse = aiResponse.replace(/^(```json)/,"");
-        aiResponse = aiResponse.replace(/(```)$/, "").trim();
+        aiResponse = aiResponse.replace(/^```json/,"");
+        aiResponse = aiResponse.replace(/```$/, "").trim();
         core.info(`Review trimmed response: ${aiResponse}`);
         const newComments = createComment(file, chunk, aiResponse);
         if (newComments) {
