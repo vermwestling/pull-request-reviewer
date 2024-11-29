@@ -38909,7 +38909,7 @@ async function doReview(userPrompt) {
       "messages": [
           {
               "role": "system",
-              "content": "You are a helpful assistant."
+              "content": "You are a helpful code reviewer that reviews pull request from Github. Data is in the form of code diff from a pull request. Answer in markdown format."
           },
           {
               "role": "user",
@@ -38956,11 +38956,13 @@ async function main() {
 
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Reivew type: ${REVIEW_TYPE}`);
   if (REVIEW_TYPE === 'PR comment') {
+    // Review by posting a single comment on the PR
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Adding PR comment`);
     const diff = await getPullRequestDiff(octokit, repository, pullRequest);
     const review = await doReview(diff);
-    await createPullRequestComment(octokit, repository, pullRequest, `Review diff test:\n ${review}`);
+    await createPullRequestComment(octokit, repository, pullRequest, review);
   } else if (REVIEW_TYPE === 'File comment') {
+    // Review by posting comments in the file that is affected.
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Adding file comment`);
     const prDetails = await getPullRequestDetails();
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`getPRDetails: ${prDetails}`);
