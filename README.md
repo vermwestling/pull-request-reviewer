@@ -1,5 +1,5 @@
 # Pull Request Reviewer
-GitHub action that reviews pull request.
+GitHub action that performs an automated code review of GitHub pull requests.
 
 ## Example pull requests
 PR examples of reviewing Java code with three known issues:
