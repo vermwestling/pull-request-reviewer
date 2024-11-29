@@ -5,7 +5,6 @@ GitHub action that reviews pull request.
 PR examples of reviewing Java code with three known issues:
 * Constructor is not private.
 * Incorrect null check in reverseString method.
-* Bad mehtod name. Then method is called 
 * Javadoc for method does not match implementation.
 
 ### Review type: PR comment
