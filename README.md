@@ -2,6 +2,10 @@
 GitHub action that reviews pull request.
 
 ## Example pull requests
+Examples of PRs reviewing Java code with three known issues
+* Constructor is not private.
+* Incorrect null check in reverseString method.
+* Javadoc for method does not match implementation.
 
 ### Review type: PR comment
 [PR example 1](https://github.com/vermwestling/pull-request-reviewer/pull/11)
