@@ -184,21 +184,12 @@ async function getPullRequestDiff2(owner, repo, pull_number) {
 
 
 async function doReview(userPrompt) {
-  const systemPrompt = `Your task is to review pull requests. Instructions:
-  - Provide the response markdown format.
-  - Inspect Javadoc and verify that the documentation is correct and matches the implementation.
-  - Focus on bugs, security issues, and performance problems.
-  - Do not give positive comments or compliments.
-  - Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
-  - Use the given description only for the overall context and only comment the code.
-  - IMPORTANT: NEVER suggest adding comments to the code.`;
-
   const postData = {
       "model": MODEL,
       "messages": [
           {
               "role": "system",
-              "content": systemPrompt
+              "content": "You are a helpful code reviewer that reviews pull request from Github. Data is in the form of code diff from a pull request. Answer in markdown format."
           },
           {
               "role": "user",
