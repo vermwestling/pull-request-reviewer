@@ -37,7 +37,7 @@ PR examples of reviewing [Java code][1] with three known issues:
 | review-type  | no       | string | `"PR comment"`   | The type of code review. Value 'PR comment' will post a single review comment on the PR. Value 'File comment' will post review comments on lines in files.
 
 
-## Example usage
+## Usage
 
 ### Configuration for using OpenAI model
 The example below shows the configuration for the OpenAI gpt-4o-mini model
