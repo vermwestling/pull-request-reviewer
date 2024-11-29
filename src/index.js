@@ -9,7 +9,8 @@ const API_ENDPOINT = core.getInput('api-endpoint');
 const API_KEY = core.getInput('api-key');
 const MODEL = core.getInput('model');
 const REVIEW_TYPE = core.getInput('review-type');
-
+const SYSTEM_PROMPT_MARKDOWN = "You are a helpful code reviewer that reviews pull request from Github. Data is in the form of code diff from a pull request. Answer in markdown format.";
+const SYSTEM_PROMPT_TEXT = "You are a helpful code reviewer that reviews pull request from Github. Data is in the form of code diff from a pull request. Answer in plain text.";
 
 async function getPullRequestDetails() {
   const { repository, number } = JSON.parse(
@@ -37,7 +38,7 @@ async function reviewCode(parsedDiff, prDetails) {
     if (file.to === "/dev/null") continue;
     for (const chunk of file.chunks) {
       const prompt = createPrompt(file, chunk, prDetails);
-      const aiResponse = await doReview(prompt);
+      const aiResponse = await doReview(prompt, SYSTEM_PROMPT_TEXT);
       if (aiResponse) {
         core.info(`Review response: ${aiResponse}`);
         const newComments = createComment(file, chunk, aiResponse);
@@ -183,13 +184,13 @@ async function getPullRequestDiff2(owner, repo, pull_number) {
 }
 
 
-async function doReview(userPrompt) {
+async function doReview(userPrompt, systemPrompt) {
   const postData = {
       "model": MODEL,
       "messages": [
           {
               "role": "system",
-              "content": "You are a helpful code reviewer that reviews pull request from Github. Data is in the form of code diff from a pull request. Answer in markdown format."
+              "content": systemPrompt
           },
           {
               "role": "user",
@@ -239,7 +240,7 @@ async function main() {
     // Review by posting a single comment on the PR
     core.info(`Adding PR comment`);
     const diff = await getPullRequestDiff(octokit, repository, pullRequest);
-    const review = await doReview(diff);
+    const review = await doReview(diff, SYSTEM_PROMPT_MARKDOWN);
     await createPullRequestComment(octokit, repository, pullRequest, review);
   } else if (REVIEW_TYPE === 'File comment') {
     // Review by posting comments in the file that is affected.
