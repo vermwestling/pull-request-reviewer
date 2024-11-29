@@ -11,6 +11,7 @@ Examples of PRs reviewing Java code with three known issues
 [PR example 1 - model Codestral by Mistal AI](https://github.com/vermwestling/pull-request-reviewer/pull/11)
 
 [PR example 2 - model Codestral by Mistal AI](https://github.com/vermwestling/pull-request-reviewer/pull/15)
+
 [PR example 3 - model Qwen Coder by Alibaba](https://github.com/vermwestling/pull-request-reviewer/pull/17)
 
 ### Review type: File comment
