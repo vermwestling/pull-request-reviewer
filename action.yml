@@ -15,7 +15,7 @@ inputs:
   review-type:
     description: "The type of code review. Value 'PR comment' will post a single review comment on the PR. Value 'File comment' will post review comments on lines in files."
     required: false
-    default: "File comment"
+    default: "PR comment"
 
 runs:
   using: 'node20'
