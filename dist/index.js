@@ -38926,8 +38926,7 @@ async function doReview(userPrompt, systemPrompt) {
 
     const response = await postApiCall(API_ENDPOINT, API_KEY, postData);
     console.log(`Response: ${JSON.stringify(response)}`);
-    //return response.choices[0].message?.content?.trim() || "{}"; 
-    return response.choices[0].message.content;
+    return response.choices[0].message?.content?.trim() || ""; 
 }
 
 
