@@ -16,6 +16,8 @@ PR examples of reviewing Java code with three known issues:
 
 [PR example 4 - model GPT-4o by OpenAI](https://github.com/vermwestling/pull-request-reviewer/pull/20)
 
+[PR example 5 - model Deepseek Coder v2 by High-Flyer](https://github.com/vermwestling/pull-request-reviewer/pull/24)
+
 ### Review type: File comment
 [PR example 1 - model Codestral by Mistal AI](https://github.com/vermwestling/pull-request-reviewer/pull/13)
 
