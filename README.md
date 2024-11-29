@@ -1,10 +1,11 @@
-# Pull Request reviewer
+# Pull Request Reviewer
 GitHub action that reviews pull request.
 
-## Exmaple pull requests
+## Example pull requests
 
 ### Review type: PR comment
 [PR example 1](https://github.com/vermwestling/pull-request-reviewer/pull/11)
+
 [PR example 2](https://github.com/vermwestling/pull-request-reviewer/pull/15)
 
 ### Review type: File comment
