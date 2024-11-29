@@ -41,6 +41,9 @@ async function reviewCode(parsedDiff, prDetails) {
       const aiResponse = await doReview(prompt, SYSTEM_PROMPT_TEXT);
       if (aiResponse) {
         core.info(`Review response: ${aiResponse}`);
+        aiResponse = aiResponse.replace(/^(```json)/,"");
+        aiResponse = aiResponse.replace(/(```)$/, "").trim();
+        core.info(`Review trimmed response: ${aiResponse}`);
         const newComments = createComment(file, chunk, aiResponse);
         if (newComments) {
           comments.push(...newComments);
@@ -78,7 +81,7 @@ function createComment(file, chunk, aiResponse) {
 
 function createPrompt(file, chunk, prDetails) {
   return `Your task is to review pull requests. Instructions:
-- Provide the response in following JSON format:  {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}
+- Provide the response in following JSON format: {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}
 - Write the review comment in valid JSON character. It will be parsed by the system.
 - Inspect Javadoc and verify that the documentation is correct and matches the implementation.
 - Focus on bugs, security issues, and performance problems.
