@@ -22,6 +22,6 @@ jobs:
         with:
           api-endpoint: 'https://542a-92-34-18-167.ngrok-free.app/v1/chat/completions'
           model: 'qwen2.5-coder:32b'
-          review-type: 'PR comment'
+          review-type: 'File comment'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
