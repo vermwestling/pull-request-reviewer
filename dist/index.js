@@ -38801,6 +38801,7 @@ function createPrompt(file, chunk, prDetails) {
   return `Your task is to review pull requests. Instructions:
 - Provide the response in following JSON format:  {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}
 - Write the review comment in valid JSON character. It will be parsed by the system.
+- Inspect Javadoc and verify that the documentation is correct and matches the implementation.
 - Do not give positive comments or compliments.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
 - Use the given description only for the overall context and only comment the code.
