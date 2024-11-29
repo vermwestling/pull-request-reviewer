@@ -8,12 +8,13 @@ Examples of PRs reviewing Java code with three known issues
 * Javadoc for method does not match implementation.
 
 ### Review type: PR comment
-[PR example 1](https://github.com/vermwestling/pull-request-reviewer/pull/11)
+[PR example 1 - model Codestral by Mistal AI](https://github.com/vermwestling/pull-request-reviewer/pull/11)
 
-[PR example 2](https://github.com/vermwestling/pull-request-reviewer/pull/15)
+[PR example 2 - model Codestral by Mistal AI](https://github.com/vermwestling/pull-request-reviewer/pull/15)
+[PR example 3 - model Qwen Coder by Alibaba](https://github.com/vermwestling/pull-request-reviewer/pull/17)
 
 ### Review type: File comment
-[PR example 1](https://github.com/vermwestling/pull-request-reviewer/pull/13)
+[PR example 1 - model Codestral by Mistal AI](https://github.com/vermwestling/pull-request-reviewer/pull/13)
 
 ## Inputs
 
