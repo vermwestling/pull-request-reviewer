@@ -2,10 +2,12 @@
 GitHub action that performs an automated code review of GitHub pull requests.
 
 ## Example pull requests
-PR examples of reviewing Java code with three known issues:
+PR examples of reviewing [Java code][1] with three known issues:
 * Constructor is not private.
 * Incorrect null check in reverseString method.
 * Javadoc for method does not match implementation.
+
+
 
 ### Review type: PR comment
 [PR example 1 - model Codestral by Mistal AI](https://github.com/vermwestling/pull-request-reviewer/pull/11)
@@ -97,3 +99,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+[1]: https://gist.github.com/vermwestling/a537fc911d9c9851a43898870ba735dc
