@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Review PR
-        uses: vermwestling/test-action@main
+        uses: vermwestling/pull-request-reviewer@main
         with:
           api-endpoint: 'https://2334-158-174-44-98.ngrok-free.app/v1/chat/completions'
           model: 'codestral'
