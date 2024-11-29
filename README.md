@@ -27,12 +27,12 @@ PR examples of reviewing Java code with three known issues:
 
 ## Inputs
 
-| name         | required | type   | default         | description |
+| Name         | Required | Type   | Default         | Description |
 | ------------ | ---      | ------ | --------------- | ----------- |
 | api-endpoint | no       | string | `"https://api.openai.com/v1/chat/completions"`  | The URL to then API endpoint.
 | api-key      | no       | string | | The API key to use for the API endpoint.
 | model        | yes      | string | `"gpt-4o-mini"`   | ID of the model to use.
-| review-type  | no       | string | `"File comment"`   | The type of code review. Value 'PR comment' will post a single review comment on the PR. Value 'File comment' will post review comments on lines in files.
+| review-type  | no       | string | `"PR comment"`   | The type of code review. Value 'PR comment' will post a single review comment on the PR. Value 'File comment' will post review comments on lines in files.
 
 
 ## Example usage
