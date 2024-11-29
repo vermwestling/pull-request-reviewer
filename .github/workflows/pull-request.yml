@@ -22,6 +22,6 @@ jobs:
         with:
           api-key: ${{ secrets.OPENAI_API_KEY }}
           model: 'gpt-4o'
-          review-type: 'PR comment'
+          review-type: 'File comment'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
